@@ -10,18 +10,23 @@ import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(
-    {
-  "type": "postgres",
-  "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "root123",
-  "database": "nestjs_tutorial",
-  "entities": [Car],
-  "synchronize": true
-}
-  ), CarsModule, CoursesModule, AuthModule, UsersModule, DatabaseModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root123',
+      database: 'nestjs_tutorial',
+      entities: [Car],
+      synchronize: true,
+    }),
+    CarsModule,
+    CoursesModule,
+    AuthModule,
+    UsersModule,
+    DatabaseModule,
+  ],
   controllers: [],
   providers: [],
 })
