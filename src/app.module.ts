@@ -5,6 +5,7 @@ import { CarsModule } from './cars/cars.module';
 import { CoursesModule } from './courses/courses.module';
 import { Car } from './cars/entities/car.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(
@@ -18,7 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   "entities": [Car],
   "synchronize": true
 }
-  ), CarsModule, CoursesModule],
+  ), CarsModule, CoursesModule, AuthModule],
   controllers: [],
   providers: [],
 })
