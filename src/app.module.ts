@@ -24,7 +24,6 @@ import databaseConfig from './config/database.config';
         password: configService.get('database.password'),
         database: configService.get('database.database'),
         synchronize: configService.get('database.synchronize'),
-        entities: [Car],
         autoLoadEntities: true,
       }),
     }),
