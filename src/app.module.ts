@@ -7,18 +7,26 @@ import { Car } from './cars/entities/car.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'root123',
-      database: 'nestjs_tutorial',
-      entities: [Car],
-      synchronize: true,
+    ConfigModule.forRoot({ isGlobal: true, load: [databaseConfig] }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      imports:[ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('database.host'),
+        port: configService.get('database.port'),
+        username: configService.get('database.username'),
+        password: configService.get('database.password'),
+        database: configService.get('database.database'),
+        synchronize: configService.get('database.synchronize'),
+        entities: [Car],
+        autoLoadEntities: true,
+      }),
     }),
     CarsModule,
     CoursesModule,
