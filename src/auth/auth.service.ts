@@ -1,4 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { CreateUserDto } from 'src/users/dto/create-users.dto';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -15,5 +16,7 @@ export class AuthService {
   //   // instead of the user object
   //   return result;
   // }
-    
+    async createUser(createUserDto:CreateUserDto){
+     return this.usersService.createUser(createUserDto);
+    }
 }
