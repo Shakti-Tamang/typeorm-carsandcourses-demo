@@ -11,7 +11,8 @@ import { create } from 'domain';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>){}
+    private userRepository: Repository<User>,
+  ) {}
   // private readonly users = [
   //   {
   //     id: 1,
@@ -34,9 +35,8 @@ export class UsersService {
   // async findOne(username: string): Promise<User | undefined> {
   //   return this.users.find(user => user.username === username);
   // }
-   createUser(createUserDto:CreateUserDto):Promise<User>{
-const user=this.userRepository.create(createUserDto);
-return this.userRepository.save(user);
-    
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const user = this.userRepository.create(createUserDto);
+    return this.userRepository.save(user);
   }
 }
